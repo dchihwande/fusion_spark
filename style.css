@@ -1,16 +1,96 @@
-﻿body {
-    font-family: Arial, sans-serif;
+/* Base Styles */
+
+body {
+    position: relative;
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
-    color: #333;
+    overflow-x: hidden;
 }
 
-header {
-    background: #2c3e50;
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('background.png'); /* Replace with actual filename */
+        background-size: cover;
+        background-position: center;
+        filter: blur(8px);
+        z-index: -1;
+    }
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+    padding: 40px;
+    border-radius: 10px;
+}
+
+
+.top-strip {
+    background-color: #001f3f; /* Navy blue */
     color: #fff;
-    padding: 20px;
+    padding: 20px 20px;
     text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#home {
+    color: #fff;
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+    #home h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    #home h2 {
+        font-size: 24px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+
+    #home p {
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+.logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+    .logo:hover {
+        animation: pulse 0.6s ease-in-out;
+    }
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 nav {
@@ -25,11 +105,33 @@ nav {
         text-decoration: none;
         font-weight: bold;
         font-size: 16px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: slideIn 0.5s ease forwards;
     }
 
-        nav a:hover {
-            text-decoration: underline;
+        nav a:nth-child(1) {
+            animation-delay: 0.2s;
         }
+
+        nav a:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        nav a:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
 
 section {
     padding: 40px;
@@ -37,11 +139,13 @@ section {
     margin: auto;
 }
 
-.services, .audience {
+.card-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
+/* Card Styling with Animation */
 
 .card {
     background: #fff;
@@ -49,6 +153,25 @@ section {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     flex: 1 1 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+}
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        background-color: #e0f7fa;
+    }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .contact-info {
@@ -59,21 +182,116 @@ section {
     max-width: 600px;
     margin: auto;
 }
+
 footer {
-    background: #2c3e50;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #001f3f; /* Navy blue */
     color: #fff;
     text-align: center;
     padding: 20px;
     font-size: 14px;
-}
-.logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
 }
 
+/* Testimonials Section */
 
+#testimonials h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testimonial-card h4 {
+    color: #2c3e50;
+    font-weight: normal;
+}
+
+.signup-form {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+    .signup-form input[type="email"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        width: 250px;
+        font-size: 16px;
+    }
+
+    .signup-form button {
+        padding: 10px 20px;
+        background: #2c3e50;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+        .signup-form button:hover {
+            background: #1a252f;
+        }
+.signup-form {
+    color: #fff;
+}
+
+    .signup-form label {
+        color: #fff;
+    }
+
+    .signup-form input[type="email"] {
+        background-color: rgba(255, 255, 255, 0.1); /* subtle transparent white */
+        color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    .signup-form input::placeholder {
+        color: #ddd;
+    }
+
+    .signup-form button {
+        background-color: #ff6600;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .signup-form button:hover {
+            background-color: #e65c00;
+        }
+.content-section h2,
+.content-section h3,
+.content-section h4 {
+    color: #fff;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #001f3f;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
